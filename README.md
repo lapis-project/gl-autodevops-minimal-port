@@ -36,7 +36,7 @@ jobs:
 # Please note that the next line only works correctly with repositories that don't contain
 # upper case characters. If you have such a repo name please replace ${{ github.repository }}
 # with org/repo-name (all lower case).
-# E. g. ACDH-OEAW/OpenAtlas-Discovery -> acdh-oeaw/openatlas-discovery
+# E. g. LAPIS-PROJECT/OpenAtlas-Discovery -> lapis-project/openatlas-discovery
       registry_root: ghcr.io/${{ github.repository }}/
       default_port: "5000"
 # Usually you don't deal with all commits since the repository was created.
@@ -85,7 +85,7 @@ jobs:
       PUBLIC_URL: ${{ steps.generate_public_url.outputs.public_url }}
   _1:
     needs: [setup_workflow_env, generate_workflow_vars]
-    uses:  acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/build-cnb-and-push-to-registry.yaml@main
+    uses:  lapis-project/gl-autodevops-minimal-port/.github/workflows/build-cnb-and-push-to-registry.yaml@main
     secrets: inherit
 # if you run this outside of of an org that provides KUBE_CONFIG etc as a secret, you need to specify every secret you want to pass by name
     with:
@@ -99,9 +99,9 @@ jobs:
       submodules: ${{ needs.setup_workflow_env.outputs.submodules }}
   _2:
     needs: [setup_workflow_env, generate_workflow_vars]
-    uses:  acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/herokuish-tests-db-url.yaml@main
+    uses:  lapis-project/gl-autodevops-minimal-port/.github/workflows/herokuish-tests-db-url.yaml@main
     secrets: inherit
-# if you run this outside of acdh-oeaw yo uneed to specify every secret you want to pass by name
+# if you run this outside of lapis-project you uneed to specify every secret you want to pass by name
     with:
       environment: ${{ needs.setup_workflow_env.outputs.environment}}
       registry_root: ${{ needs.setup_workflow_env.outputs.registry_root }}
@@ -114,9 +114,9 @@ jobs:
       submodules: ${{ needs.setup_workflow_env.outputs.submodules }}
   _3:
     needs: [setup_workflow_env, generate_workflow_vars, _1, _2]
-    uses: acdh-oeaw/gl-autodevops-minimal-port/.github/workflows/deploy.yml@main
+    uses: lapis-project/gl-autodevops-minimal-port/.github/workflows/deploy.yml@main
     secrets: inherit
-# if you run this outside of acdh-oeaw yo uneed to specify every secret you want to pass by name
+# if you run this outside of lapis-project you uneed to specify every secret you want to pass by name
 #      KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
 #      KUBE_INGRESS_BASE_DOMAIN: ${{ secrets.KUBE_INGRESS_BASE_DOMAIN }}
 #      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
@@ -251,8 +251,8 @@ readinessProbe:
 `$var` variables will be replaced with the current values for the action running at the moment.
 
 See also:
-* [auto-deploy-values.yaml created in deploy.yaml](https://github.com/acdh-oeaw/gl-autodevops-minimal-port/blob/main/.github/workflows/deploy.yml#L184-L234)
-* [possible $vars](https://github.com/acdh-oeaw/gl-autodevops-minimal-port/blob/main/.github/workflows/deploy.yml#L253)
+* [auto-deploy-values.yaml created in deploy.yaml](https://github.com/lapis-project/gl-autodevops-minimal-port/blob/main/.github/workflows/deploy.yml#L184-L234)
+* [possible $vars](https://github.com/lapis-project/gl-autodevops-minimal-port/blob/main/.github/workflows/deploy.yml#L253)
 
 If you need to further customize deployment (like deploying an extra service like solr with your application) you can store a bundled helm chart in a directory `chart` in your repository and that will be used instead of the generic `auto-deploy-app` chart from this repository.
 
