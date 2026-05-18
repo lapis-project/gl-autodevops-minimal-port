@@ -105,6 +105,9 @@ on:
       K8S_SECRET_NUXT_API_AUTH_URL: 
         description: 'A secret used by Nuxt apps as environment variable in Kubernetes'
         required: false
+      K8S_SECRET_NUXT_OPENSEARCH_BASE_URL:
+        description: 'Base URL for Open Search API'
+        required: false
       K8S_SECRET_NUXT_SESSION_PASSWORD: 
         description: 'A secret used by Nuxt apps as environment variable in Kubernetes'
         required: false
